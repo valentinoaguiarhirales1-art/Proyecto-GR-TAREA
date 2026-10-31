@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📅 ReservaYa — Gestor de Reservas
+# *📅 Reserva Ya Gestor de Reservas*
 
 ### *Reserva pistas, salas y recursos en un par de clics* ✨
 
@@ -9,17 +9,17 @@
 ![License](https://img.shields.io/badge/Licencia-MIT-green)
 ![Tests](https://img.shields.io/badge/tests-9%20passing-brightgreen)
 
-**🎓 Proyecto 4 · Django · Máster Full Stack — *Conquer Blocks***
+**🎓 Proyecto 4 · Django · Máster Full Stack *Conquer Blocks***
 
 </div>
 
 ---
 
-## 🎯 ¿Qué es?
+## *🎯 ¿Qué es?*
 
 **ReservaYa** es una aplicación web hecha con **Django** para reservar *recursos* (pistas deportivas 🎾⚽, salas de reuniones 💼…) con un **calendario interactivo** de disponibilidad.
 
-## 🌟 Funcionalidades
+## *🌟 Funcionalidades*
 
 | | Característica | Detalle |
 |---|---|---|
@@ -31,14 +31,14 @@
 | 🛠️ | **Panel de gestión** | Estadísticas, filtro por recurso y cancelación de reservas, solo para **staff** |
 | 🔐 | **Usuarios** | Registro, login y logout |
 
-## 🧱 Modelos
+## *🧱 Modelos*
 
 - 🏟️ **Resource** — nombre, descripción, capacidad, emoji y duración del turno
 - 🕘 **Availability** — horario de apertura por *día de la semana* y recurso
 - 🎟️ **Booking** — reserva con inicio/fin, estado y `recurrence_id` para las series
 - 👤 **User** — el usuario integrado de Django
 
-## 🚀 Puesta en marcha local
+## *🚀 Puesta en marcha local*
 
 ```bash
 cd booking-system-django
@@ -57,19 +57,19 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Abre 👉 **http://127.0.0.1:8000/** y gestiona recursos y horarios desde **/admin/** 🛠️
+***Abre 👉 **http://127.0.0.1:8000/** y gestiona recursos y horarios desde **/admin/** 🛠️***
 
-## 🧪 Tests
+## *🧪 Tests*
 
 ```bash
 python manage.py test
 ```
 
-Cubren *solapamientos*, *series recurrentes*, *horarios*, *cancelaciones* y *permisos* ✅
+***Cubren *solapamientos*, *series recurrentes*, *horarios*, *cancelaciones* y *permisos* ✅***
 
-## 🐍 Despliegue gratuito en PythonAnywhere
+## *🐍 Despliegue gratuito en PythonAnywhere*
 
-Usa SQLite (sin Docker) y los estáticos los sirve **WhiteNoise**, así que no hace falta configurar *Static files* en la pestaña Web.
+***Usa SQLite (sin Docker) y los estáticos los sirve **WhiteNoise**, así que no hace falta configurar *Static files* en la pestaña Web.***
 
 1. Crea una cuenta *Beginner* en [pythonanywhere.com](https://www.pythonanywhere.com) y abre una consola **Bash**.
 2. Clona el repositorio y crea el entorno (Python **3.12 o superior**, requerido por Django 6):
@@ -90,9 +90,9 @@ Usa SQLite (sin Docker) y los estáticos los sirve **WhiteNoise**, así que no h
 5. Abre el *WSGI configuration file*, borra todo y pega [pythonanywhere_wsgi.py](booking-system-django/pythonanywhere_wsgi.py) cambiando `TU_USUARIO` y `SECRET_KEY` (la ruta ya apunta a `Proyecto-GR-TAREA/booking-system-django`).
 6. Pulsa **Reload** y abre `https://TU_USUARIO.pythonanywhere.com` desde cualquier navegador, también el del móvil 📱.
 
-> 🔄 Para actualizar: `git pull`, `python manage.py migrate` y **Reload**. En la cuenta gratuita hay que pulsar *Run until 3 months from today* en la pestaña Web de vez en cuando para que no expire.
+> ***🔄 Para actualizar: `git pull`, `python manage.py migrate` y **Reload**. En la cuenta gratuita hay que pulsar *Run until 3 months from today* en la pestaña Web de vez en cuando para que no expire.***
 
-## ☁️ Despliegue alternativo en un droplet con Docker
+## *☁️ Despliegue alternativo en un droplet con Docker*
 
 Incluye **Docker Compose**, **PostgreSQL** y **Caddy** (HTTPS automático). Desde `booking-system-django/`:
 
@@ -102,20 +102,20 @@ docker compose up -d --build
 docker compose exec web python manage.py createsuperuser
 ```
 
-Apunta antes el registro DNS **A** de tu dominio a la IP del droplet y abre los puertos **80** y **443**. Las migraciones y los estáticos se aplican al arrancar.
+***Apunta antes el registro DNS **A** de tu dominio a la IP del droplet y abre los puertos **80** y **443**. Las migraciones y los estáticos se aplican al arrancar.***
 
-## 🗂️ Estructura
+## *🗂️ Estructura*
 
 ```
-booking-system-django/
-├── config/      ⚙️ Ajustes y URLs del proyecto
-├── reservas/    📦 App: modelos, servicios (lógica de reservas), vistas, tests
-└── templates/   🎨 Plantillas HTML
+📂booking-system-django
+├── 📂config      ⚙️ Ajustes y URLs del proyecto
+├── 📂reservar    📦 App: modelos, servicios (lógica de reservas), vistas, tests
+└── 📂templates   🎨 Plantillas HTML
 ```
 
-## 📄 Licencia
+## *📄 Licencia*
 
-Distribuido bajo licencia **MIT** 💚 — consulta el archivo [LICENSE](LICENSE).
+***Distribuido bajo licencia **MIT** 💚 consulta el archivo [LICENSE](LICENSE).***
 
 <div align="center">
 
