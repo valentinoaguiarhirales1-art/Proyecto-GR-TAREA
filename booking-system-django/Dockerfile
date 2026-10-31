@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt \
 
 COPY --chown=app:app . .
 COPY docker/entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh && chmod 755 /entrypoint.sh
 
 USER app
 EXPOSE 8000
