@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ resource.name }}{% endblock %}
+{% block content %}
+<h1>{{ resource.icon }} {{ resource.name }}</h1>
+<p>{{ resource.description }}</p>
+<div class="two-col">
+  <section class="card">
+    <div class="cal-head">
+      <button class="btn small" id="prev" type="button">◀</button>
+      <strong id="month-label"></strong>
+      <button class="btn small" id="next" type="button">▶</button>
+    </div>
+    <div id="calendar" class="calendar"></div>
+    <p class="legend"><span class="dot free"></span>Libre <span class="dot some"></span>Casi lleno <span class="dot full"></span>Completo</p>
+  </section>
+  <section class="card">
+    <h2>🕒 Turnos del <span id="day-label"></span></h2>
+    <div id="slots" class="slots"></div>
+    <form id="book-form" method="post" action="{% url 'reservar' resource.pk %}" hidden>
+      {% csrf_token %}
+      <input type="hidden" name="start"><input type="hidden" name="end">
+      <p>Reservar <strong id="chosen"></strong></p>
+      <label>🔁 Repetir cada semana durante
+        <select name="repeat_weeks">
+          <option value="0">No repetir</option>
+          {% for n in "123456789"|make_list %}<option value="{{ n }}">{{ n }} semana{{ n|pluralize }} más</option>{% endfor %}
+        </select>
+      </label>
+      <label>📝 Notas <input name="notes" maxlength="200"></label>
+      <div id="form-msg" class="alert error" hidden></div>
+      <button class="btn">Confirmar reserva</button>
+    </form>
+    {% if not user.is_authenticated %}<p><a href="{% url 'login' %}?next={{ request.path }}">Inicia sesión</a> para reservar.</p>{% endif %}
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>window.BOOKING = {slotsUrl: "{% url 'slots' resource.pk %}", monthUrl: "{% url 'mes' resource.pk %}",
+  today: "{{ today|date:'Y-m-d' }}", auth: {{ user.is_authenticated|yesno:'true,false' }}};</script>
+<script src="{% static 'reservas/calendar.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Mis reservas{% endblock %}
+{% block content %}
+<h1>🗓️ Mis reservas</h1>
+<h2>Próximas</h2>
+<table>
+  <tr><th>Recurso</th><th>Fecha</th><th>Notas</th><th></th></tr>
+  {% for b in upcoming %}
+  <tr>
+    <td>{{ b.resource.icon }} {{ b.resource.name }}</td>
+    <td>{{ b.start|date:"D d/m/Y H:i" }} - {{ b.end|date:"H:i" }}{% if b.recurrence_id %} 🔁{% endif %}</td>
+    <td>{{ b.notes }}</td>
+    <td>
+      <form method="post" action="{% url 'cancelar' b.pk %}" class="inline">{% csrf_token %}
+        <button class="btn danger small" onclick="return confirm('¿Cancelar esta reserva?')">Cancelar</button>
+      </form>
+      {% if b.recurrence_id %}
+      <form method="post" action="{% url 'cancelar' b.pk %}" class="inline">{% csrf_token %}
+        <input type="hidden" name="series" value="1">
+        <button class="btn danger small" onclick="return confirm('¿Cancelar toda la serie futura?')">Cancelar serie</button>
+      </form>{% endif %}
+    </td>
+  </tr>
+  {% empty %}<tr><td colspan="4">No tienes reservas próximas.</td></tr>{% endfor %}
+</table>
+<h2>Historial</h2>
+<table>
+  {% for b in past %}
+  <tr><td>{{ b.resource.name }}</td><td>{{ b.start|date:"d/m/Y H:i" }}</td><td>{{ b.get_status_display }}</td></tr>
+  {% empty %}<tr><td>Sin historial.</td></tr>{% endfor %}
+</table>
+{% endblock %}

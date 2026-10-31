@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Panel{% endblock %}
+{% block content %}
+<h1>🛠️ Panel de gestión</h1>
+<div class="grid">
+  {% for s in stats %}<div class="card"><h3>{{ s.resource.icon }} {{ s.resource.name }}</h3><p class="big">{{ s.upcoming }}</p><small>reservas futuras</small></div>{% endfor %}
+  <div class="card"><h3>👤 Usuarios con reservas</h3><p class="big">{{ total_users }}</p></div>
+  <div class="card"><h3>❌ Canceladas</h3><p class="big">{{ cancelled }}</p></div>
+</div>
+<form method="get" class="filter">
+  <select name="resource" onchange="this.form.submit()">
+    <option value="">Todos los recursos</option>
+    {% for r in resources %}<option value="{{ r.pk }}" {% if selected == r.pk|stringformat:"s" %}selected{% endif %}>{{ r.name }}</option>{% endfor %}
+  </select>
+</form>
+<table>
+  <tr><th>Recurso</th><th>Usuario</th><th>Fecha</th><th></th></tr>
+  {% for b in upcoming %}
+  <tr><td>{{ b.resource.name }}</td><td>{{ b.user.username }}</td>
+    <td>{{ b.start|date:"d/m/Y H:i" }} - {{ b.end|date:"H:i" }}</td>
+    <td><form method="post" action="{% url 'cancelar' b.pk %}" class="inline">{% csrf_token %}
+      <input type="hidden" name="next" value="{% url 'panel' %}">
+      <button class="btn danger small">Cancelar</button></form></td></tr>
+  {% empty %}<tr><td colspan="4">Sin reservas.</td></tr>{% endfor %}
+</table>
+{% endblock %}

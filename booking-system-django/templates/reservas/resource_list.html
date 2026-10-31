@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>🏟️ Recursos disponibles</h1>
+<div class="grid">
+  {% for r in resources %}
+  <a class="card resource" href="{% url 'recurso' r.pk %}">
+    <div class="emoji">{{ r.icon }}</div>
+    <h2>{{ r.name }}</h2>
+    <p>{{ r.description|truncatechars:100 }}</p>
+    <small>👥 {{ r.capacity }} · ⏱️ {{ r.slot_minutes }} min</small>
+  </a>
+  {% empty %}
+  <p>Aún no hay recursos. Un administrador puede crearlos en el <a href="/admin/">admin</a>.</p>
+  {% endfor %}
+</div>
+{% endblock %}
